@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.fsck.k9.FontSizes;
 import com.fsck.k9.K9;
 import com.fsck.k9.R;
+import com.fsck.k9.arabic.reshaping.ArabicReshaping;
 import com.fsck.k9.helper.Contacts;
 import com.fsck.k9.Account;
 import com.fsck.k9.helper.DateFormatter;
@@ -211,11 +212,11 @@ public class MessageHeader extends LinearLayout {
         if (subject == null || subject.equals("")) {
             mSubjectView.setText(mContext.getText(R.string.general_no_subject));
         } else {
-            mSubjectView.setText(subject);
+            mSubjectView.setText(ArabicReshaping.reshape(subject));
         }
         mSubjectView.setTextColor(0xff000000 | defaultSubjectColor);
 
-        mFromView.setText(from);
+        mFromView.setText(ArabicReshaping.reshape(from.toString()));
 
         if (date != null) {
             mDateView.setText(date);

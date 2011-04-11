@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import com.fsck.k9.Account;
 import com.fsck.k9.K9;
 import com.fsck.k9.R;
+import com.fsck.k9.arabic.reshaping.ArabicReshaping;
 import com.fsck.k9.controller.MessagingController;
 import com.fsck.k9.controller.MessagingListener;
 import com.fsck.k9.crypto.CryptoProvider;
@@ -218,9 +219,9 @@ public class SingleMessageView extends LinearLayout {
 
     public void loadBodyFromText(CryptoProvider cryptoProvider, PgpData pgpData, Message message, String emailText, String contentType) {
         if (mScreenReaderEnabled) {
-            mAccessibleMessageContentView.loadDataWithBaseURL("http://", emailText, contentType, "utf-8", null);
+            mAccessibleMessageContentView.loadDataWithBaseURL("http://", ArabicReshaping.reshape_browser(emailText), contentType, "utf-8", null);
         } else {
-            mMessageContentView.loadDataWithBaseURL("http://", emailText, contentType, "utf-8", null);
+            mMessageContentView.loadDataWithBaseURL("http://", ArabicReshaping.reshape_browser(emailText), contentType, "utf-8", null);
             mMessageContentView.scrollTo(0, 0);
         }
         updateCryptoLayout(cryptoProvider, pgpData, message);

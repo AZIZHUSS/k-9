@@ -60,6 +60,7 @@ import com.fsck.k9.SearchSpecification;
 import com.fsck.k9.activity.setup.AccountSettings;
 import com.fsck.k9.activity.setup.FolderSettings;
 import com.fsck.k9.activity.setup.Prefs;
+import com.fsck.k9.arabic.reshaping.ArabicReshaping;
 import com.fsck.k9.controller.MessagingController;
 import com.fsck.k9.controller.MessagingListener;
 import com.fsck.k9.controller.MessagingController.SORT_TYPE;
@@ -2205,7 +2206,7 @@ public class MessageList
             if ((message.message.getSubject() == null) || message.message.getSubject().equals("")) {
                 holder.subject.setText(getText(R.string.general_no_subject));
             } else {
-                holder.subject.setText(message.message.getSubject());
+                      holder.subject.setText(ArabicReshaping.reshape(message.message.getSubject()));
             }
 
             int senderTypeface = message.read ? Typeface.NORMAL : Typeface.BOLD;
@@ -2219,7 +2220,7 @@ public class MessageList
                  */
 
                 holder.preview.setText(new SpannableStringBuilder(recipientSigil(message))
-                                       .append(message.sender).append(" ").append(message.message.getPreview()),
+                                       .append(ArabicReshaping.reshape(message.sender.toString())).append(" ").append(ArabicReshaping.reshape(message.message.getPreview())),
                                        TextView.BufferType.SPANNABLE);
                 Spannable str = (Spannable)holder.preview.getText();
 
@@ -2232,7 +2233,7 @@ public class MessageList
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                            );
             } else {
-                holder.from.setText(new SpannableStringBuilder(recipientSigil(message)).append(message.sender));
+                holder.from.setText(new SpannableStringBuilder(recipientSigil(message)).append(ArabicReshaping.reshape(message.sender.toString())));
 
                 holder.from.setTypeface(null, senderTypeface);
             }

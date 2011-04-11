@@ -792,7 +792,7 @@ public class MessageView extends K9Activity implements OnClickListener {
                 mMessage.setFlag(Flag.SEEN, false);
                 mMessageView.setHeaders(mMessage, mAccount);
                 String subject = mMessage.getSubject();
-                setTitle(subject);
+                setTitle(ArabicReshaping.reshape(subject));
             } catch (Exception e) {
                 Log.e(K9.LOG_TAG, "Unable to unset SEEN flag on message", e);
             }
